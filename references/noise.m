@@ -1,9 +1,12 @@
-im = rgb2gray(imread('blu.png'));
+im = rgb2gray(imread('../resources/test4.jpg'));
 nois = spatialPattern(size(im), -1);
 imshow(uint8(10000*nois)+uint8(im));
 % disp(10000*nois)
-
-
+% ret = spatialPattern([5, 5], -1)
+a = uint8(im(221,420));
+z = 10000*nois;
+b = uint8(z)
+c = a + b;
 function x = spatialPattern(DIM,BETA)
     % function x = spatialPattern(DIM, BETA),
 %
@@ -46,7 +49,7 @@ function x = spatialPattern(DIM,BETA)
 % First quadrant are positive frequencies.  Zero frequency is at u(1,1).
 u = [(0:floor(DIM(1)/2)) -(ceil(DIM(1)/2)-1:-1:1)]'/DIM(1);
 % Reproduce these frequencies along ever row
-disp(u)
+% disp(u)
 u = repmat(u,1,DIM(2));
 % the set of frequencies along the second dimension.  For a square
 % region it will be the transpose of u
@@ -60,7 +63,6 @@ S_f = (u.^2 + v.^2).^(BETA/2);
 S_f(S_f==inf) = 0;
 % Generate a grid of random phase shifts
 phi = rand(DIM);
-
 % Inverse Fourier transform to obtain the the spatial pattern
 x = ifft2(S_f.^0.5 .* (cos(2*pi*phi)+i*sin(2*pi*phi)));
 % Pick just the real component
