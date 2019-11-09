@@ -98,6 +98,7 @@ for betaa=betas
     
     for tt=1:T
         % Z step
+        disp(tt);
         Z = im2col(cleanI,[patchSize patchSize]);
 
         % calculate orignal cost if LogLFunc is defined and output
@@ -144,4 +145,12 @@ tt = imfilter(xx,K,'conv','same');
 tt = tt(floor(size(K,1)/2)+1:end-floor(size(K,1)/2),floor(size(K,2)/2)+1:end-floor(size(K,2)/2));
 y = lambda*imfilter(tt,rot90(rot90(K)),'conv','full');
 y = y + beta*counts.*xx;
+% disp(y);
+disp(size(y));
+% disp(K);
+disp(size(K));
+% disp(xx);
+disp(size(xx));
 y = y(:);
+
+% disp(y);
