@@ -74,7 +74,7 @@ if nargout>2
     end
 end
 % TT = myconvmtx2(noiseI,K);
-
+ 
 beta = abs(betas(1)/4);
 cleanI = noiseI;
 k=1;
@@ -134,7 +134,7 @@ end
 cleanI = reshape(cleanI,size(noiseI));
 cleanI(cleanI>1)=1;
 cleanI(cleanI<0)=0;
-psnr = psnr(:)';
+psnr = psnr(:);
 
 % function to apply the corruption model (implemented efficiantly using
 % convolutions instead of matrix multiplications)
