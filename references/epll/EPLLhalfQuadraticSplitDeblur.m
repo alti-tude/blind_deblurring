@@ -131,7 +131,7 @@ for betaa=betas
         k=k+1;      
     end
 end
-        
+
 cleanI = reshape(cleanI,size(noiseI));
 cleanI(cleanI>1)=1;
 cleanI(cleanI<0)=0;
