@@ -98,7 +98,6 @@ for betaa=betas
     
     for tt=1:T
         % Z step
-        disp(tt);
         Z = im2col(cleanI,[patchSize patchSize]);
 
         % calculate orignal cost if LogLFunc is defined and output
@@ -109,16 +108,19 @@ for betaa=betas
         end
         
         cleanZ = prior(Z,patchSize,(beta)^-0.5,size(noiseI));
-        
+        fprintf('prior size = %s\n',num2str(size(cleanZ)));
         % x step
         [I1,counts] = scol2im(cleanZ,patchSize,size(I,1),size(I,2),'sum');
+%         disp(counts);
 
         tt1 = noiseI(floor(size(K,1)/2)+1:end-floor(size(K,1)/2),floor(size(K,2)/2)+1:end-floor(size(K,2)/2));
         % convolution with the rotated kernel (LHS of Equation 4 in the
         % paper)
         tt1 = conv2(tt1,rot90(rot90(K)),'full');
         tt2 = I1;
-
+        fprintf('I1 size = %s\n',num2str(size(I1)));
+%         imshow(uint8(I1));
+%         disp(I1);
         
         % Solve for x, using the convolved image from above (Equation 4 in
         % the paper)
@@ -140,17 +142,30 @@ psnr = psnr(:);
 % function to apply the corruption model (implemented efficiantly using
 % convolutions instead of matrix multiplications)
 function y = Afun(x,K,counts,beta,lambda,ss,transp_flag)
+% disp(K);
+% fprintf("rotated:=");
+% disp(rot90(rot90(K)));
 xx = reshape(x,ss);
 tt = imfilter(xx,K,'conv','same');
 tt = tt(floor(size(K,1)/2)+1:end-floor(size(K,1)/2),floor(size(K,2)/2)+1:end-floor(size(K,2)/2));
 y = lambda*imfilter(tt,rot90(rot90(K)),'conv','full');
 y = y + beta*counts.*xx;
 % disp(y);
-disp(size(y));
+% disp(size(y));
 % disp(K);
-disp(size(K));
+% disp(size(K));
 % disp(xx);
-disp(size(xx));
+% disp(size(xx));
+% figure(1);
+% imshow(xx);
+% title('xx');
+% figure(2);
+% imshow(tt);
+% title('tt');
+% figure(3);
+% imshow(y);
+% title('y');
+% disp(y);
 y = y(:);
 
 % disp(y);
