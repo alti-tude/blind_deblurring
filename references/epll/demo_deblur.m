@@ -43,11 +43,11 @@ prior = @(Z,patchSize,noiseSD,imsize) aprxMAPGMM(Z,patchSize,noiseSD,imsize,GS,e
 % disp(size(prior))
 % comment this line if you want the total cost calculated
 LogLFunc = [];
-
+imwrite(noiseI, 'blurcheetah.jpg')
 % deblur
 tic
 % [cleanI,psnr,~] = EPLLhalfQuadraticSplitDeblur(noiseI,64/noiseSD^2,K,patchSize,50*[1 2 4 8 16 32 64],1,prior,I,LogLFunc);
-[cleanI,psnr,~] = EPLLhalfQuadraticSplitDeblur(noiseI,64/noiseSD^2,K,patchSize,50*[1],1,prior,I,LogLFunc);
+% [cleanI,psnr,~] = EPLLhalfQuadraticSplitDeblur(noiseI,64/noiseSD^2,K,patchSize,50*[1],1,prior,I,LogLFunc);
 toc
 
 % output result
