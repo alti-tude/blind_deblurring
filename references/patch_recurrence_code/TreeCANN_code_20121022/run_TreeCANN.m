@@ -92,7 +92,7 @@ train_patches = single(train_patches)-repmat(mn,1,N);
 % construct the matrix Y
 Y = train_patches' / sqrt(N-1);
 
-[PC, SCORE, variances]  = princomp(Y);
+[PC, SCORE, variances]  = pca(Y);
 
 %project the original data
 PC_reduction = PC(:,1:floor(num_PCA_dims));
