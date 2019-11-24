@@ -3,8 +3,9 @@
 
 ### Installing Requirements
 
- > pip install -r requirements.txt
+ ```bash
+ pip install -r requirements.txt
+ jupyter-notebook
+```
 
- - Run jupyter-notebook
-
- - Run all cells in the notebook deconv.ipynb
+- Run all cells in the notebook deconv.ipynb
