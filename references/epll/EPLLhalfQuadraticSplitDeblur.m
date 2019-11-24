@@ -109,7 +109,7 @@ for betaa=betas
         
         cleanZ = prior(Z,patchSize,(beta)^-0.5,size(noiseI));
 
-        fprintf('prior size = %s\n',num2str(size(cleanZ)));
+      %  fprintf('prior size = %s\n',num2str(size(cleanZ)));
         % x step
         [I1,counts] = scol2im(cleanZ,patchSize,size(I,1),size(I,2),'sum');
 %         disp(counts);
@@ -119,16 +119,17 @@ for betaa=betas
         % paper)
         tt1 = conv2(tt1,rot90(rot90(K)),'full');
         tt2 = I1;
-        fprintf('I1 size = %s\n',num2str(size(I1)));
-        fprintf("lambda = %d : beta = %d\n", lambda, beta);
-        fprintf("tt1 max = %d\n tt2 max = %d\n lambda*tti max = %d\n beta*tt2 max = %d\n comb max = %d\n", max(tt1(:)), max(tt2(:)), max(lambda*tt1(:)), max(beta*tt2(:)), max(lambda*tt1(:) + beta*tt2(:)));
-        fprintf("tt1 above");
+     %   fprintf('I1 size = %s\n',num2str(size(I1)));
+    %    fprintf("lambda = %d : beta = %d\n", lambda, beta);
+   %     fprintf("tt1 max = %d\n tt2 max = %d\n lambda*tti max = %d\n beta*tt2 max = %d\n comb max = %d\n", max(tt1(:)), max(tt2(:)), max(lambda*tt1(:)), max(beta*tt2(:)), max(lambda*tt1(:) + beta*tt2(:)));
+  %      fprintf("tt1 above");
 %         disp(tt2(:));
 %         fprintf("tt2 above");
 %         disp(lambda*tt1(:) + beta*tt2(:))
 %         imshow(uint8(I1));
 %         disp(I1);
-        
+        figure(4);imshow(uint8(I1));drawnow;
+        disp(I1)
         % Solve for x, using the convolved image from above (Equation 4 in
         % the paper)
         cleanI = reshape(bicg(@(x,tflag) Afun(x,K,counts,beta,lambda,size(I),tflag),(lambda*tt1(:) + beta*tt2(:)),1e-6,2500),size(noiseI));

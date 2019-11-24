@@ -8,7 +8,7 @@ I = double(rgb2gray(imread('160068.jpg')))/255;
 % load kernels.mat
 % K = kernel1;
 K = fspecial('motion',10,45);
-% K = fspecial('gaussian',[5 5],1);
+%K = fspecial('gaussian',[5 5],1);
 noiseSD = 0.01;
 patchSize = 8;
 
@@ -43,7 +43,7 @@ prior = @(Z,patchSize,noiseSD,imsize) aprxMAPGMM(Z,patchSize,noiseSD,imsize,GS,e
 % disp(size(prior))
 % comment this line if you want the total cost calculated
 LogLFunc = [];
-imwrite(noiseI, 'blurcheetah.jpg')
+% imwrite(noiseI, 'blurcheetah.jpg')
 % deblur
 tic
 % [cleanI,psnr,~] = EPLLhalfQuadraticSplitDeblur(noiseI,64/noiseSD^2,K,patchSize,50*[1 2 4 8 16 32 64],1,prior,I,LogLFunc);
